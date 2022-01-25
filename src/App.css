@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: cadetblue;
 }
 
 .App-logo {
@@ -26,15 +27,6 @@
 
 .App-link {
   color: #61dafb69;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .app-container {
@@ -67,19 +59,6 @@ td {
   background-color: rgb(214, 232, 243);
 }
 
-form {
-  display: flex;
-  gap: 5px;
-}
-
-form td:last-child {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-form * {
-  font-size: 18px;
-}
 
 .edit {
   background-color: aquamarine;

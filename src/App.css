@@ -41,6 +41,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   font-size: calc(10px + 1vmin);
+  font-family: "Roboto";
 }
 
 th,

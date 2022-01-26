@@ -120,12 +120,12 @@ const Posts = () => {
 
   let pageIncrementbtn = null;
   if (pages.length > maxPageNumberLimit) {
-    pageIncrementbtn = <li onClick={handleNextbtn}> &hellip; </li>;
+    pageIncrementbtn = <li /* onClick={handleNextbtn} */> &hellip; </li>;
   }
 
   let pageDecrementbtn = null;
   if (minPageNumberLimit >= 1) {
-    pageDecrementbtn = <li onClick={handlePrevbtn}> &hellip; </li>;
+    pageDecrementbtn = <li /* onClick={handlePrevbtn} */> &hellip; </li>;
   }
 
   return (

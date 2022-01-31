@@ -1,0 +1,42 @@
+    {/* <table className="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            <input type="checkbox"></input>
+          </th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Address</th>
+          <th>Job Title</th>
+          <th>Edit</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.map((post, index) => (
+          <tr key={index}>
+            <td>
+              <input type="checkbox"></input>
+            </td>
+            <td>{post.id}</td>
+            <td>{post.name}</td>
+            <td>{post.email}</td>
+            <td>{post.phoneNumber}</td>
+            <td>{post.address}</td>
+            <td>{post.jobTitle}</td>
+            <td>
+              <button type="button" class="btn btn-outline-info">
+                EDIT
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-warning">
+                VIEW
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table> */}

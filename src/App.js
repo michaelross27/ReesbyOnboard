@@ -1,5 +1,5 @@
 import React from "react";
-import Posts from './components/posts';
+import Posts from './components/Posts';
 import "./App.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

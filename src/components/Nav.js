@@ -6,7 +6,7 @@ class Nav extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.notifyPathname(window.location.pathname);
   }
 

@@ -33,9 +33,9 @@ class App extends Component {
           <Nav notifyPathname={this.notifyPathname}
           pathname={this.state.pathname}/>
           <Routes>
-            <Route path="/"  component={() => <Posts />} />
-            <Route path="/create"  component={() => <CreatePost />} />
-            <Route path="/edit/:id"  component={() => <CreatePost />} />
+            <Route path="/" element={<Posts />} />
+            <Route path="/create"  element={<CreatePost />} />
+            <Route path="/edit/:id"  element={<CreatePost />} />
           </Routes>
         </div>
     );

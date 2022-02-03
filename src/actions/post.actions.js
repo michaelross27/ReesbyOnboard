@@ -25,13 +25,51 @@ export const fetchPostsSuccess = (data) => {
     }
 }
 
+export const fetchPostsLoading = (data) => {
+    return {
+    type: FETCH_POST_LOADING,
+    payload: data,        
+    }
+}
+
+export const fetchPostsError = (data) => {
+    return {
+    type: FETCH_POST_ERROR,
+    payload: data,        
+    }
+}
+
+const normalizeResponse = (data) => {
+    const arr = data.map(item => {
+        const keys = Object.keys(item);
+
+        keys.forEach(k => {
+            item[k.toLowerCase()] = item[k];
+            delete item[k];
+        });
+        return item;
+    });
+    return arr;
+}
+
 export const fetchPosts = () => {
+    let isLoading = true;
     return (dispatch) => {
+        dispatch(fetchPostsLoading(isLoading));
         return axios.get(url)
         .then(response => {
-
+            const data = normalizeResponse(response.data);
+            dispatch(fetchPostsSuccess(data));
+            isLoading = false;
+            dispatch(fetchPostsLoading(isLoading));
         }).catch(error => {
-            
+            const errorPayload = {};
+            errorPayload ['message'] = error.response.data.message;
+            errorPayload ['status'] = error.response.status;
+
+            dispatch(fetchPostsError(errorPayload));
+            isLoading = false;
+            dispatch(fetchPostsLoading(isLoading));
         })
     }
 }

@@ -17,10 +17,18 @@ class Posts extends Component {
     super(props);
   }
   render() {
-    return (
-      <div>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    if (this.props.isLoading) {
+      return <p>Loading...</p>;
+    } else if (this.props.error) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          {this.props.error.message}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Table className="table table-striped">
             <TableHead>
               <TableRow>
                 <TableCell>
@@ -29,28 +37,37 @@ class Posts extends Component {
                 <TableCell>ID</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Phone Number</TableCell>
                 <TableCell>Address</TableCell>
+                <TableCell>Phone Number</TableCell>
                 <TableCell>Job Title</TableCell>
                 <TableCell>Edit</TableCell>
                 <TableCell>View</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.posts.map((post) => {
-                return <Post key={post.id} post={post} />;
+              {this.props.posts.map((post, index) => {
+                return (
+                  <React.Fragment key={post.id}>
+                    <Post post={post} />
+                  </React.Fragment>
+                );
               })}
             </TableBody>
           </Table>
-        </TableContainer>
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
+
+
+
 
 const mapStateToProps = (state) => {
   return {
     posts: state.postsData.posts || [],
+    error: state.postsData.error || null,
+    isLoading: state.postsData.isLoading,
   };
 };
 

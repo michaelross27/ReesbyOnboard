@@ -11,11 +11,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Post from "../components/Post";
+import { fetchPosts } from "../actions/post.actions";
 
 class Posts extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    this.props.onFetch();
+  }
+
   render() {
     if (this.props.isLoading) {
       return <p>Loading...</p>;
@@ -71,4 +77,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Posts);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetch: () => {
+      dispatch(fetchPosts());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

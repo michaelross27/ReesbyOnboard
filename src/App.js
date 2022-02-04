@@ -11,7 +11,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-class App extends Component {
+function (App) {
   constructor(props) {
     super(props);
 

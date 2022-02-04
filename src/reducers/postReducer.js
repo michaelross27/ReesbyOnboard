@@ -22,6 +22,10 @@ const defaultState = {
 
 const postReducer = ( state = defaultState, action) => {
     switch(action.type) {
+        case ADD_POST_SUCCESS:
+            return {...state, posts: [...state.posts, action.payload]};
+        case ADD_POST_ERROR:
+            return {...state, error: action.payload};
         case FETCH_POST_SUCCESS:
             return {...state, posts: action.payload};
         case FETCH_POST_LOADING:

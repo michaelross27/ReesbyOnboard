@@ -14,9 +14,6 @@ import { fetchPosts } from "./actions/post.actions";
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
-store.dispatch(fetchPosts());
-
-
 export const history = createBrowserHistory({forceRefresh: true})
 ReactDOM.render(
   <React.StrictMode>

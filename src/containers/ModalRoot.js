@@ -1,13 +1,8 @@
-
 import React from 'react'
 import { connect } from 'react-redux'
 import ReactModal from 'react-modal'
-import { default as modalTypes } from '../components/Modals'
 
-const MODAL_TYPES = {
-  'form': modalTypes.formModal,
-}
-
+import FormModal from '../components/Modals'
 
 const mapStateToProps = state => ({
   ...state.modal
@@ -16,18 +11,10 @@ const mapStateToProps = state => ({
 class ModalContainer extends React.Component {
   constructor(props) {
     super(props)
-    /* this.state = {
+    this.state = {
       modalIsOpen: props.modalProps.open
-    } */
-    this.closeModal = this.closeModal.bind(this)
-  }
-
-  componentDidUpdate(nextProps) {
-    if (nextProps.modalProps.open !== this.props.modalProps.open) {
-      this.setState({
-        modalIsOpen: nextProps.modalProps.open
-      })
     }
+    this.closeModal = this.closeModal.bind(this)
   }
 
   closeModal() {
@@ -35,20 +22,18 @@ class ModalContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.modalType) {
-      return null
-    }
-    const SpecifiedModal = MODAL_TYPES[this.props.modalType]
     return (
       <div>
         <ReactModal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           contentLabel="Example Modal"
           ariaHideApp={false}
+          overlayClassName="modal fade show"
+          bodyOpenClassName="modal-open"
+          className="modal-dialog modal-dialog-centered"
         >
-          <SpecifiedModal
+          <FormModal
             closeModal={this.closeModal}
             {...this.props.modalProps}
           />
@@ -57,6 +42,5 @@ class ModalContainer extends React.Component {
     )
   }
 }
-
 
 export default connect(mapStateToProps, null)(ModalContainer)

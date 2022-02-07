@@ -26,6 +26,11 @@ const postReducer = ( state = defaultState, action) => {
             return {...state, posts: [...state.posts, action.payload]};
         case ADD_POST_ERROR:
             return {...state, error: action.payload};
+        case EDIT_POST_ERROR:
+            return {...state, error: action.payload};
+        case EDIT_POST_SUCCESS:
+            const updatedPosts = state.posts.filter(post => post.id !== action.payload.id);
+            return {...state, posts: [ ...updatedPosts, action.payload]};
         case FETCH_POST_SUCCESS:
             return {...state, posts: action.payload};
         case FETCH_POST_LOADING:

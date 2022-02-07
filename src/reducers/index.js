@@ -1,6 +1,12 @@
-import { combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import posts from './postReducer';
+import modalReducer from './modalReducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   postsData: posts, 
+  modalReducer: modalReducer,
+  form: formReducer,
 });
+
+export default rootReducer;

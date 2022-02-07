@@ -42,6 +42,19 @@ export const createPostsError = (data) => {
 };
 
 export const createPost = (post) => {
+  if (post.id) {
+    const data = {
+      id: post.id,
+      name: post.name,
+    email: post.email,
+    address: post.address,
+    phoneNumber: post.phoneNumber,
+    jobTitle: post.jobTitle,
+    };
+    return (dispatch) => {
+      dispatch(editPost(data));
+    }
+  } else {
   const data = {
     name: post.name,
     email: post.email,
@@ -81,15 +94,64 @@ export const createPost = (post) => {
       })
       .catch((error) => {
         const errorPayload = {};
-        errorPayload["message"] = error.response.data;
+        errorPayload["message"] = error.response.data.message;
         errorPayload["status"] = error.response.status;
 
         dispatch(createPostsError(errorPayload));
       });
   };
 };
+}
 
 //EDIT
+
+export const editPost = (data) => {
+  const id = data.id;
+
+  return (dispatch) => {
+    return axios.put(url, data)
+    .then(() => {
+      return axios.get(`${url}/${id}`)
+      .then (response => {
+        dispatch(editPostsSuccess(response.data));
+        history.push('/');
+      }).catch(error => {
+        const errorPayload = {};
+        errorPayload["message"] = error.response.data;
+        errorPayload["status"] = error.response.status;
+
+        dispatch(editPostsError(error.payload));
+      });
+    }).catch((error) => {
+      const errorPayload = {};
+        errorPayload["message"] = error.response.data;
+        errorPayload["status"] = error.response.status;
+
+        dispatch(editPostsError(error.payload));
+    })
+  }
+}
+
+export const editPostsSuccess = (data) => {
+  return {
+    type: EDIT_POST_SUCCESS,
+    payload: data,
+  };
+};
+
+export const editPostsLoading = (data) => {
+  return {
+    type: EDIT_POST_LOADING,
+    payload: data,
+  };
+};
+
+export const editPostsError = (data) => {
+  return {
+    type: EDIT_POST_ERROR,
+    payload: data,
+  };
+};
 
 //DELETE
 

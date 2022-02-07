@@ -13,3 +13,4 @@ export const hideModal = () => dispatch => {
     type: ActionTypes.HIDE_MODAL
   })
 }
+

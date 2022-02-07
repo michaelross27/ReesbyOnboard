@@ -22,6 +22,11 @@ class CreatePost extends Component {
     this.props.onAdd(this.state);
   }
 
+  handleOnValueChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
 
   handleReset(e) {
     e.preventDefault();
@@ -34,9 +39,35 @@ class CreatePost extends Component {
     });
   }
 
+  hideModal = () => {
+    this.setState({ show: false });
+  }
+
+  componentDidMount() {
+    const props = this.props;
+
+    if (props.location && props.location.state) {
+      const post = props.location.state.post;
+
+      this.setState({
+        id: post.id,
+        name: post.name,
+        email: post.email,
+        address: post.address,
+        phoneNumber: post.phoneNumber,
+        jobTitle: post.jobTitle,
+      });
+    }
+  }
+
   render() {
     return (
       <div className="create-post">
+        {this.props.error ? 
+        <div className="alert alert-danger" role="alert">
+          {this.props.error.message}
+        </div>: ''
+          }
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             <input
@@ -74,7 +105,6 @@ class CreatePost extends Component {
               className="form-control"
               name="phoneNumber"
               placeholder="Enter Your Phone Number"
-
               value={this.state.phoneNumber}
               onChange={this.handleOnValueChange.bind(this)}
             />
@@ -98,7 +128,12 @@ class CreatePost extends Component {
               className="btn btn-default"
               onClick={this.handleReset.bind(this)}
             >
-              Cancel
+              Reset
+            </button>
+            <button type="button"
+              className="btn btn-danger"
+              onClick={this.hideModal}>
+              Close
             </button>
           </div>
         </form>
@@ -243,7 +278,9 @@ export default reduxForm({
 })(ContactForm); */
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    error: state.postsData.error,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

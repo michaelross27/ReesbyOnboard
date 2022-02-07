@@ -14,6 +14,7 @@ import { fetchPosts } from "../actions/post.actions";
 import FormModal from "../components/Modals";
 import { reset, initialize } from "redux-form";
 import { useActions } from "../actions/useActions";
+import { history } from "../index";
 
 const url =
   "http://malih-auth.ap-southeast-2.elasticbeanstalk.com/campaign/getAllUploadedEmails/listId/480";
@@ -23,8 +24,17 @@ const RenderData = (posts) => {
   const [openForm, setOpenForm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+  const handleEdit = (post) => {
+    history.push({
+      pathname: `/edit/${post.id}`,
+      state: {
+        post: post,
+      }
+    })
+  }
 
-  const actions = {
+
+/*   const actions = {
     edit: (post) => {
       setIsEditing(true);
       dispatch(initialize("formModal", post));
@@ -36,7 +46,7 @@ const RenderData = (posts) => {
       },
       close: () => cleanPostDetails(),
     },
-  };
+  }; */
 
   const form = {
     open: () => setOpenForm(true),
@@ -83,7 +93,7 @@ const RenderData = (posts) => {
                 <button
                   color="primary"
                   variant="outlined"
-                  onClick={() => actions.edit(post)}
+                  onClick={handleEdit}
                 >
                   EDIT
                 </button>
@@ -92,7 +102,7 @@ const RenderData = (posts) => {
                 <button
                   color="primary"
                   variant="contained"
-                  onClick={() => actions.view.open(post)}
+                  onClick={() => this.handleEdit.bind(this)}
                 >
                   VIEW
                 </button>

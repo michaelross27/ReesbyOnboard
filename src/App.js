@@ -7,9 +7,10 @@ import { Button, Fab, CssBaseline } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import styled from "styled-components";
 import { showModal, hideModal } from "./actions/modalActions";
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect, useSelector, useDispatch } from "react-redux";
 import { reset, initialize } from "redux-form";
 import ModalContainer from "./containers/ModalRoot";
+import Modal from "./components/Modals"
 import { useActions } from "./actions/useActions";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -18,7 +19,6 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { posts } from "./data";
 
 const FloatingActionButtonContainer = styled.div`
   position: fixed;
@@ -26,46 +26,33 @@ const FloatingActionButtonContainer = styled.div`
   right: 10px;
 `;
 
-const mapDispatchToProps = (dispatch) => ({
-  hideModal: () => dispatch(hideModal()),
-  showModal: (modalProps, modalType) => {
-    dispatch(showModal({ modalProps, modalType }));
-  },
-});
 
 function App() {
-  const dispatch = useDispatch();
-  const [openForm, setOpenForm] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
-  const form = {
-    open: () => setOpenForm(true),
-    close: () => {
-        dispatch(reset("contactForm"));
-        setOpenForm(false);
-    },
-};
-
-const actions = {
-  create: () => {
-    setIsEditing(false);
-    dispatch(initialize("formModal", {}));
-    form.open();
-},
-
-}
-
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div className="App">
-      <Posts />
-      <FloatingActionButtonContainer>
-        <Fab color="primary" onClick={actions.create}>
-          <AddIcon />
-        </Fab>
-      </FloatingActionButtonContainer>
-      <ModalContainer /* hideModal={this.props.hideModal} */ />
-    </div>
-  );
-}
+      <>
+      {showModal && (
+        <Modal
+          onCloseButtonClick={() => {
+            setShowModal(false);
+          }}
+        />
+      )}
+        <div className="App">
+        <Posts />
+        <FloatingActionButtonContainer>
+          <Fab color="primary" onClick={() => {
+              setShowModal(true);
+            }} >
+            <AddIcon />
+          </Fab>
+        </FloatingActionButtonContainer>
+        
+      </div>
+      </>
+    );
+  }
+  
 
-export default connect(null, mapDispatchToProps)(App);
+  
+export default App;

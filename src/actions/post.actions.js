@@ -16,7 +16,7 @@ import axios from "axios";
 import { history } from "../index";
 
 const url =
-  "http://malih-auth.ap-southeast-2.elasticbeanstalk.com/campaign/getAllUploadedEmails/listId/480";
+  "http://malih-auth.ap-southeast-2.elasticbeanstalk.com/api/v1/getAllUploadedEmails/listId/480";
 
 //CREATE
 

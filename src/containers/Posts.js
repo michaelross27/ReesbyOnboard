@@ -17,7 +17,7 @@ import { useActions } from "../actions/useActions";
 import { history } from "../index";
 
 const url =
-  "http://malih-auth.ap-southeast-2.elasticbeanstalk.com/campaign/getAllUploadedEmails/listId/480";
+"http://malih-auth.ap-southeast-2.elasticbeanstalk.com/api/v1/getAllUploadedEmails/listId/480"
 
 const RenderData = (posts) => {
   const dispatch = useDispatch();
@@ -159,7 +159,11 @@ const Posts = (data) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios(url);
+      const response = await axios.get('http://malih-auth.ap-southeast-2.elasticbeanstalk.com/api/v1/getAllUploadedEmails/listId/480', {
+        headers: {
+          'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYWxpaC50ZXN0LmVtYWlsLjFAZ21haWwuY29tIiwiaWF0IjoxNjQ0Mjc0Nzg1LCJleHAiOjE2NDQzNjExODV9.pfcJy7lkNw1RzzOvZXEjds9LCOIHpmCExxVPdVuWCS8gOiRdzb8j2JivSkrW6zoFV6ZsSJvvVcuVJy1u-fbx1w'
+        }
+      });
       console.log(response.data);
       setPosts(response.data);
     };
